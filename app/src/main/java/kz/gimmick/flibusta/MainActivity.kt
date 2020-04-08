@@ -30,7 +30,9 @@ import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.book_card_view.view.*
+import kotlinx.android.synthetic.main.bottom_book_detailed.*
 import kotlinx.android.synthetic.main.bottom_navigation_search.*
+import kotlinx.android.synthetic.main.bottom_navigation_search.search_navigation_view
 import kz.gimmick.flibusta.api.Responses
 import java.lang.Exception
 
@@ -40,6 +42,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
+    private val server = "http://75485940.ngrok.io"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,7 +90,7 @@ class MainActivity : AppCompatActivity() {
             bottomNavDrawerFragment.view?.findViewById<EditText>(R.id.authorSurnameEditText)
 
 
-        var requestString = "http://a91f3989.ngrok.io/api/widesearch?"
+        var requestString = server+ "/api/widesearch?"
         if (title?.text?.isNotEmpty()!!)
             requestString += "book_title=" + title?.text + "&"
         if (authorName?.text?.isNotEmpty()!!)
@@ -145,10 +148,7 @@ class MainActivity : AppCompatActivity() {
             return MyViewHolder(bookCardView)
         }
 
-        fun download(context: Context, url: String) {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            context.startActivity(intent)
-        }
+
 
         // Replace the contents of a view (invoked by the layout manager)
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -156,25 +156,11 @@ class MainActivity : AppCompatActivity() {
             holder.itemView.cardView[0].setOnClickListener {
 
 
-                val bottomBookDetailedFragment = BottomBookDetailed()
-                val bookReadButton =
-                    bottomBookDetailedFragment.view?.findViewById<Button>(R.id.bookReadButton)
-                val bookFb2Button =
-                    bottomBookDetailedFragment.view?.findViewById<Button>(R.id.bookFb2Button)
-                val bookEpubButton =
-                    bottomBookDetailedFragment.view?.findViewById<Button>(R.id.bookEpubButton)
-                val bookMobiButton =
-                    bottomBookDetailedFragment.view?.findViewById<Button>(R.id.bookMobiButton)
+                val bottomBookDetailedFragment = BottomBookDetailed(book)
                 bottomBookDetailedFragment.show(
                     supportFragmentManager,
                     bottomBookDetailedFragment.tag
                 )
-
-                val downloadLink = "https://flibusta.site/b/" + book.book_id + "/"
-                bookReadButton?.setOnClickListener { download(holder.itemView.context, downloadLink+"") }
-                bookFb2Button?.setOnClickListener { download(holder.itemView.context, downloadLink+"fb2") }
-                bookEpubButton?.setOnClickListener { download(holder.itemView.context, downloadLink+"epub") }
-                bookMobiButton?.setOnClickListener { download(holder.itemView.context, downloadLink+"mobi") }
             }
 
             val bookTitle = holder.itemView.findViewById<TextView>(R.id.bookCardViewBookTitle)
@@ -227,8 +213,9 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    class BottomBookDetailed : BottomSheetDialogFragment() {
+    class BottomBookDetailed (book: Responses.Book): BottomSheetDialogFragment() {
 
+        private val book = book
         override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -239,16 +226,24 @@ class MainActivity : AppCompatActivity() {
 
         override fun onActivityCreated(savedInstanceState: Bundle?) {
             super.onActivityCreated(savedInstanceState)
+            val bookReadButton =
+                bottom_book_detailed.findViewById<Button>(R.id.bookReadButton)
+            val bookFb2Button =
+                bottom_book_detailed.findViewById<Button>(R.id.bookFb2Button)
+            val bookEpubButton =
+                bottom_book_detailed.findViewById<Button>(R.id.bookEpubButton)
+            val bookMobiButton =
+                bottom_book_detailed.findViewById<Button>(R.id.bookMobiButton)
 
-            search_navigation_view.setNavigationItemSelectedListener { menuItem ->
-                // Bottom Navigation Drawer menu item clicks
-                when (menuItem.itemId) {
-                    // R.id.nav1 -> context!!.toast(getString(R.string.nav1_clicked))
-                }
-                // Add code here to update the UI based on the item selected
-                // For example, swap UI fragments here
-                true
-            }
+            val downloadLink = "https://flibusta.site/b/" + book.book_id + "/"
+            bookReadButton.setOnClickListener { download(bottom_book_detailed.context, downloadLink+"read") }
+            bookFb2Button.setOnClickListener { download(bottom_book_detailed.context, downloadLink+"fb2") }
+            bookEpubButton.setOnClickListener { download(bottom_book_detailed.context, downloadLink+"epub") }
+            bookMobiButton.setOnClickListener { download(bottom_book_detailed.context, downloadLink+"mobi") }
+        }
+        fun download(context: Context, url: String) {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            context.startActivity(intent)
         }
     }
 }

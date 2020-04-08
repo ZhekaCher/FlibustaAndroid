@@ -6,6 +6,9 @@
     <string name="title">Title</string>
     <string name="author_name">Author Name</string>
     <string name="author_surname">Author Surname</string>
-    <string name="authors">Authors:</string>
+    <string name="authors">Authors:</string>~
     <string name="genres">Genres:</string>
+    <string name="translators">Translators:</string>
+    <string name="series">Series:</string>
+    <string name="rating">Rating:</string>
 </resources>

@@ -11,7 +11,7 @@
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/search_navigation_view"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:paddingBottom="40dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,6 +37,162 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/book_logo" />
 
+
+            <TextView
+                android:id="@+id/bookDetailedTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="40dp"
+                android:fontFamily="@font/bookman_old_style_bold"
+                android:text="АВТОСТОПОМ ПО ГАЛАКТИКЕ ИЛИ РЕСТОРАН В КОНЦЕ ДОРОГИ"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchImageView" />
+
+            <TextView
+                android:id="@+id/authorsTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/bookman_old_style"
+                android:text="@string/authors"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bookDetailedTitle" />
+
+            <TextView
+                android:id="@+id/bookDetailedAuthors"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="40dp"
+                android:fontFamily="@font/bookman_old_style_bold"
+                android:text="НИЛ ГЕЙМАН\nДУГЛАС АДАМС"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bookDetailedTitle" />
+
+            <TextView
+                android:id="@+id/genresTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/bookman_old_style"
+                android:text="@string/genres"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bookDetailedAuthors" />
+
+            <TextView
+                android:id="@+id/bookDetailedGenres"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="40dp"
+                android:fontFamily="@font/bookman_old_style_bold"
+                android:text="УЖАСЫ\nМИСТИКА"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bookDetailedAuthors" />
+
+            <TextView
+                android:id="@+id/translatorsTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/bookman_old_style"
+                android:text="@string/translators"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bookDetailedGenres" />
+
+            <TextView
+                android:id="@+id/bookDetailedTranslators"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="145dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="40dp"
+                android:fontFamily="@font/bookman_old_style_bold"
+                android:text="Игорь Иванов\nВиктор Петров"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bookDetailedGenres" />
+
+            <TextView
+                android:id="@+id/seriesTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/bookman_old_style"
+                android:text="@string/series"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bookDetailedTranslators" />
+
+            <TextView
+                android:id="@+id/bookDetailedSeries"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="40dp"
+                android:fontFamily="@font/bookman_old_style_bold"
+                android:text="Чак Паланик И Его Бойцовский Клуб"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bookDetailedTranslators" />
+
+            <TextView
+                android:id="@+id/ratingsTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/bookman_old_style"
+                android:text="@string/rating"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bookDetailedSeries" />
+
+            <TextView
+                android:id="@+id/bookDetailedRating"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="40dp"
+                android:fontFamily="@font/bookman_old_style_bold"
+                android:text="Файл оценен на 5"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bookDetailedSeries" />
+
             <Button
                 android:id="@+id/bookEpubButton"
                 android:layout_width="0dp"
@@ -53,13 +209,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="40dp"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:text="Read"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/searchImageView" />
+                app:layout_constraintTop_toBottomOf="@+id/bookDetailedRating" />
 
             <Button
                 android:id="@+id/bookMobiButton"
