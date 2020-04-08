@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_view_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:behavior_hideable="true"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/search_navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="4dp"
+        android:paddingBottom="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/searchImageView"
+                android:layout_width="328dp"
+                android:layout_height="79dp"
+                android:layout_marginTop="16dp"
+                android:adjustViewBounds="true"
+                android:cropToPadding="true"
+                android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/search_logo" />
+
+            <RelativeLayout
+                android:id="@+id/relativeLayoutBookTitle"
+                android:layout_width="328sp"
+                android:layout_height="59sp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchImageView">
+
+                <EditText
+                    android:id="@+id/bookTitleEditText"
+                    android:singleLine="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/border"
+                    android:paddingStart="5sp"
+                    android:textColorHighlight="@color/colorGrey"
+                    android:textColorLink="@color/colorBlack"
+                    android:textCursorDrawable="@color/colorBlack"
+                    tools:ignore="RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="7dp"
+                    android:background="#ffffff"
+                    android:text="@string/title" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayoutAuthorName"
+                android:layout_width="328sp"
+                android:layout_height="59sp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.506"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/relativeLayoutBookTitle">
+
+                <EditText
+                    android:id="@+id/authorNameEditText"
+                    android:singleLine="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/border"
+                    android:paddingStart="5sp"
+                    android:textColorHighlight="@color/colorGrey"
+                    android:textColorLink="@color/colorBlack"
+                    android:textCursorDrawable="@color/colorBlack"
+                    tools:ignore="RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="7dp"
+                    android:background="#ffffff"
+                    android:text="@string/author_name" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayoutAuthorSurname"
+                android:layout_width="328sp"
+                android:layout_height="59sp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/relativeLayoutAuthorName">
+
+                <EditText
+                    android:id="@+id/authorSurnameEditText"
+                    android:singleLine="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/border"
+                    android:paddingStart="5sp"
+                    android:textColorHighlight="@color/colorGrey"
+                    android:textColorLink="@color/colorBlack"
+                    android:textCursorDrawable="@color/colorBlack"
+                    tools:ignore="RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="7dp"
+                    android:background="#ffffff"
+                    android:text="@string/author_surname" />
+
+            </RelativeLayout>
+
+            <Button
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                android:id="@id/search_button"
+                android:layout_width="326dp"
+                android:layout_height="67dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/bookman_old_style_bold"
+                android:insetTop="6dp"
+                android:onClick="search"
+                android:text="@string/search"
+                android:textColor="#000000"
+                android:textSize="25sp"
+                android:tooltipText="@string/search"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/relativeLayoutAuthorSurname"
+                app:rippleColor="@color/colorPrimaryHalfOpacity"
+                app:strokeColor="@color/colorPrimaryDark"
+                app:strokeWidth="2dp" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.navigation.NavigationView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
