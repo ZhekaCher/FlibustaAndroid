@@ -12,6 +12,7 @@ import android.view.animation.Interpolator
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.children
 import androidx.core.view.get
@@ -71,17 +72,25 @@ class MainActivity : AppCompatActivity() {
     fun search(view: View) {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         val searchPogressBar = findViewById<ProgressBar>(R.id.searchProgressBar)
+        val mainConstraintLayout = findViewById<ConstraintLayout>(R.id.mainConstraintLayout)
+        val alertTextView = findViewById<TextView>(R.id.alertTextView)
+        recyclerView.adapter = null
+        alertTextView.isVisible = false
+        alertTextView.text = ""
+        mainConstraintLayout.isVisible = true
+
+
         searchPogressBar.isVisible = true
-        val progressBarThread = Thread {
-            try {
-                for (i in 1..100) {
-                    searchPogressBar.progress = i
-                    Thread.sleep(200)
-                }
-            } catch (e: Exception) {
-            }
-        }
-        progressBarThread.start()
+//        val progressBarThread = Thread {
+//            try {
+//                for (i in 1..100) {
+//                    searchPogressBar.progress = i
+//                    Thread.sleep(200)
+//                }
+//            } catch (e: Exception) {
+//            }
+//        }
+//        progressBarThread.start()
 
         val title = bottomNavDrawerFragment.view?.findViewById<EditText>(R.id.bookTitleEditText)
         val authorName =
@@ -90,7 +99,7 @@ class MainActivity : AppCompatActivity() {
             bottomNavDrawerFragment.view?.findViewById<EditText>(R.id.authorSurnameEditText)
 
 
-        var requestString = server+ "/api/widesearch?"
+        var requestString = server + "/api/widesearch?"
         if (title?.text?.isNotEmpty()!!)
             requestString += "book_title=" + title?.text + "&"
         if (authorName?.text?.isNotEmpty()!!)
@@ -108,24 +117,31 @@ class MainActivity : AppCompatActivity() {
                     res.body,
                     Responses.SearchResponse::class.java
                 )
-                progressBarThread.interrupt()
+//                progressBarThread.interrupt()
                 searchPogressBar.isVisible = false
-                recyclerView.adapter = AlphaInAnimationAdapter(
-                    RecyclerViewAdapter(
-                        response.books,
-                        supportFragmentManager
-                    )
-                ).apply {
-                    // Change the durations.
-                    setDuration(300)
-                    // Disable the first scroll mode.
-                    setFirstOnly(false)
-                }
-                recyclerView.adapter = ScaleInAnimationAdapter(recyclerView.adapter).apply {
-                    // Change the durations.
-                    setDuration(300)
-                    // Disable the first scroll mode.
-                    setFirstOnly(false)
+                if (response.books != null) {
+                    mainConstraintLayout.isVisible = false
+                    recyclerView.adapter = AlphaInAnimationAdapter(
+                        RecyclerViewAdapter(
+                            response.books,
+                            supportFragmentManager
+                        )
+                    ).apply {
+                        // Change the durations.
+                        setDuration(300)
+                        // Disable the first scroll mode.
+                        setFirstOnly(false)
+                    }
+                    recyclerView.adapter = ScaleInAnimationAdapter(recyclerView.adapter).apply {
+                        // Change the durations.
+                        setDuration(300)
+                        // Disable the first scroll mode.
+                        setFirstOnly(false)
+                    }
+                } else {
+                    mainConstraintLayout.isVisible = true
+                    alertTextView.isVisible = true
+                    alertTextView.text = "THE SEARCH DIDN'T FIND ANY INFORMATION"
                 }
 
             }).execute()
@@ -149,7 +165,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
         // Replace the contents of a view (invoked by the layout manager)
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
             val book = books[position]
@@ -170,13 +185,13 @@ class MainActivity : AppCompatActivity() {
             authors.text = ""
             genres.text = ""
             if (book.authors != null) {
-                for (author in book.authors!!)
+                for (author in book.authors)
                     authors.text = authors.text.toString() + author.author_fullname + ";\n"
-                authors.text = authors.text.substring(0, authors.text.length - 2)
+                authors.text = authors.text.substring(0, authors.text.length - 1)
             } else
                 authors.text = "-"
             if (book.genres != null) {
-                for (genre in book.genres!!)
+                for (genre in book.genres)
                     genres.text = genres.text.toString() + genre.genre_title + ";\n"
                 genres.text = genres.text.substring(0, genres.text.length - 1)
             } else
@@ -213,7 +228,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    class BottomBookDetailed (book: Responses.Book): BottomSheetDialogFragment() {
+    class BottomBookDetailed(book: Responses.Book) : BottomSheetDialogFragment() {
 
         private val book = book
         override fun onCreateView(
@@ -226,21 +241,88 @@ class MainActivity : AppCompatActivity() {
 
         override fun onActivityCreated(savedInstanceState: Bundle?) {
             super.onActivityCreated(savedInstanceState)
-            val bookReadButton =
-                bottom_book_detailed.findViewById<Button>(R.id.bookReadButton)
-            val bookFb2Button =
-                bottom_book_detailed.findViewById<Button>(R.id.bookFb2Button)
-            val bookEpubButton =
-                bottom_book_detailed.findViewById<Button>(R.id.bookEpubButton)
-            val bookMobiButton =
-                bottom_book_detailed.findViewById<Button>(R.id.bookMobiButton)
+            val bookReadButton = bottom_book_detailed.findViewById<Button>(R.id.bookReadButton)
+            val bookFb2Button = bottom_book_detailed.findViewById<Button>(R.id.bookFb2Button)
+            val bookEpubButton = bottom_book_detailed.findViewById<Button>(R.id.bookEpubButton)
+            val bookMobiButton = bottom_book_detailed.findViewById<Button>(R.id.bookMobiButton)
+            val bookTitle = bottom_book_detailed.findViewById<TextView>(R.id.bookDetailedTitle)
+            val bookRating = bottom_book_detailed.findViewById<TextView>(R.id.bookDetailedRating)
+            val bookAuthors = bottom_book_detailed.findViewById<TextView>(R.id.bookDetailedAuthors)
+            val bookGenres = bottom_book_detailed.findViewById<TextView>(R.id.bookDetailedGenres)
+            val bookTranslators =
+                bottom_book_detailed.findViewById<TextView>(R.id.bookDetailedTranslators)
+            val bookSeries = bottom_book_detailed.findViewById<TextView>(R.id.bookDetailedSeries)
+            val bookSize = bottom_book_detailed.findViewById<TextView>(R.id.bookDetailedSize)
+
+            bookTitle.text = book.book_title
+            if (book.size != null)
+                bookSize.text = book.size
+            else
+                bookSize.text = "-"
+
+            if (book.rating != null)
+                bookRating.text = book.rating
+            else
+                bookRating.text = "-"
+
+            if (book.authors != null) {
+                for (author in book.authors)
+                    bookAuthors.text = bookAuthors.text.toString() + author.author_fullname + ";\n"
+                bookAuthors.text = bookAuthors.text.substring(0, bookAuthors.text.length - 1)
+            } else
+                bookAuthors.text = "-"
+
+            if (book.genres != null) {
+                for (genre in book.genres)
+                    bookGenres.text = bookGenres.text.toString() + genre.genre_title + ";\n"
+                bookGenres.text = bookGenres.text.substring(0, bookGenres.text.length - 1)
+            } else
+                bookGenres.text = "-"
+
+            if (book.series != null) {
+                for (series in book.series)
+                    bookSeries.text = bookSeries.text.toString() + series.series_name + ";\n"
+                bookSeries.text = bookSeries.text.substring(0, bookSeries.text.length - 1)
+            } else
+                bookSeries.text = "-"
+
+            if (book.translators != null) {
+                for (translator in book.translators)
+                    bookTranslators.text =
+                        bookTranslators.text.toString() + translator.translator_fullname + ";\n"
+                bookTranslators.text =
+                    bookTranslators.text.substring(0, bookTranslators.text.length - 1)
+            } else
+                bookTranslators.text = "-"
+
 
             val downloadLink = "https://flibusta.site/b/" + book.book_id + "/"
-            bookReadButton.setOnClickListener { download(bottom_book_detailed.context, downloadLink+"read") }
-            bookFb2Button.setOnClickListener { download(bottom_book_detailed.context, downloadLink+"fb2") }
-            bookEpubButton.setOnClickListener { download(bottom_book_detailed.context, downloadLink+"epub") }
-            bookMobiButton.setOnClickListener { download(bottom_book_detailed.context, downloadLink+"mobi") }
+            bookReadButton.setOnClickListener {
+                download(
+                    bottom_book_detailed.context,
+                    downloadLink + "read"
+                )
+            }
+            bookFb2Button.setOnClickListener {
+                download(
+                    bottom_book_detailed.context,
+                    downloadLink + "fb2"
+                )
+            }
+            bookEpubButton.setOnClickListener {
+                download(
+                    bottom_book_detailed.context,
+                    downloadLink + "epub"
+                )
+            }
+            bookMobiButton.setOnClickListener {
+                download(
+                    bottom_book_detailed.context,
+                    downloadLink + "mobi"
+                )
+            }
         }
+
         fun download(context: Context, url: String) {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             context.startActivity(intent)

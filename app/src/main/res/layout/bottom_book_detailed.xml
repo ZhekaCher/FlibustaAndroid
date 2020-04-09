@@ -46,7 +46,6 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="40dp"
                 android:fontFamily="@font/bookman_old_style_bold"
-                android:text="АВТОСТОПОМ ПО ГАЛАКТИКЕ ИЛИ РЕСТОРАН В КОНЦЕ ДОРОГИ"
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -74,7 +73,6 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="40dp"
                 android:fontFamily="@font/bookman_old_style_bold"
-                android:text="НИЛ ГЕЙМАН\nДУГЛАС АДАМС"
                 android:textColor="@color/colorBlack"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -102,7 +100,6 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="40dp"
                 android:fontFamily="@font/bookman_old_style_bold"
-                android:text="УЖАСЫ\nМИСТИКА"
                 android:textColor="@color/colorBlack"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -130,7 +127,6 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="40dp"
                 android:fontFamily="@font/bookman_old_style_bold"
-                android:text="Игорь Иванов\nВиктор Петров"
                 android:textColor="@color/colorBlack"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -158,7 +154,6 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="40dp"
                 android:fontFamily="@font/bookman_old_style_bold"
-                android:text="Чак Паланик И Его Бойцовский Клуб"
                 android:textColor="@color/colorBlack"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -186,21 +181,49 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="40dp"
                 android:fontFamily="@font/bookman_old_style_bold"
-                android:text="Файл оценен на 5"
                 android:textColor="@color/colorBlack"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bookDetailedSeries" />
 
+            <TextView
+                android:id="@+id/sizeTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/bookman_old_style"
+                android:text="@string/file_size"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bookDetailedRating" />
+
+            <TextView
+                android:id="@+id/bookDetailedSize"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="40dp"
+                android:fontFamily="@font/bookman_old_style_bold"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bookDetailedRating" />
+
             <Button
                 android:id="@+id/bookEpubButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="40dp"
+                android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:text="EPUB"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bookReadButton" />
 
@@ -215,15 +238,17 @@
                 android:text="Read"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bookDetailedRating" />
+                app:layout_constraintTop_toBottomOf="@+id/bookDetailedSize" />
 
             <Button
                 android:id="@+id/bookMobiButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:text="MOBI"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/bookEpubButton"
                 app:layout_constraintHorizontal_bias="0.50"
                 app:layout_constraintStart_toEndOf="@+id/bookFb2Button"
@@ -234,9 +259,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:text="FB2"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bookReadButton" />
 

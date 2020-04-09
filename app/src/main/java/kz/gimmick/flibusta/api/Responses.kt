@@ -2,7 +2,7 @@ package kz.gimmick.flibusta.api
 
 class Responses {
     data class SearchResponse(
-        val books: List<Book>
+        val books: List<Book>?
     )
 
     data class Book(
@@ -12,6 +12,7 @@ class Responses {
         val translators: List<Translator>?,
         val authors: List<Author>?,
         val series: List<Series>?,
+        val rating: String?,
         val size: String?
     )
 

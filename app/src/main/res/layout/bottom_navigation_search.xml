@@ -49,12 +49,12 @@
 
                 <EditText
                     android:id="@+id/bookTitleEditText"
-                    android:singleLine="true"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="15dp"
                     android:background="@drawable/border"
                     android:paddingStart="5sp"
+                    android:singleLine="true"
                     android:textColorHighlight="@color/colorGrey"
                     android:textColorLink="@color/colorBlack"
                     android:textCursorDrawable="@color/colorBlack"
@@ -82,12 +82,12 @@
 
                 <EditText
                     android:id="@+id/authorNameEditText"
-                    android:singleLine="true"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="15dp"
                     android:background="@drawable/border"
                     android:paddingStart="5sp"
+                    android:singleLine="true"
                     android:textColorHighlight="@color/colorGrey"
                     android:textColorLink="@color/colorBlack"
                     android:textCursorDrawable="@color/colorBlack"
@@ -114,12 +114,12 @@
 
                 <EditText
                     android:id="@+id/authorSurnameEditText"
-                    android:singleLine="true"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="15dp"
                     android:background="@drawable/border"
                     android:paddingStart="5sp"
+                    android:singleLine="true"
                     android:textColorHighlight="@color/colorGrey"
                     android:textColorLink="@color/colorBlack"
                     android:textCursorDrawable="@color/colorBlack"
@@ -136,8 +136,8 @@
             </RelativeLayout>
 
             <Button
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                 android:id="@id/search_button"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                 android:layout_width="326dp"
                 android:layout_height="67dp"
                 android:layout_marginTop="20dp"
